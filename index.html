@@ -6,16 +6,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My valentine</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
 </head>
+
+<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const loveBtn = document.getElementById("love");
+        const noLoveBtn = document.getElementById("no-love");
+
+        let loveWidth = loveBtn.offsetWidth;
+        let noLoveWidth = noLoveBtn.offsetWidth;
+
+        let loveFont = 20;
+        let noLoveFont = 20;
+
+        const step = 30;
+        const fontStep = 2;
+
+        let canGoNext = false;
+
+        // กดรัก
+        loveBtn.addEventListener("click", () => {
+            if (!canGoNext) {
+                loveBtn.classList.add("shake");
+                setTimeout(() => loveBtn.classList.remove("shake"), 400);
+                return;
+            }
+            window.location.href = "memory.html";
+        });
+
+        // กดไม่รัก
+        noLoveBtn.addEventListener("click", () => {
+            const maxLoveWidth = window.innerWidth - 40;
+
+            loveWidth += step;
+            noLoveWidth -= step;
+
+            loveFont += fontStep;
+            noLoveFont -= fontStep;
+
+            // กันไม่ให้ปุ่มไม่รักเล็กเกิน
+            if (noLoveWidth < 60) noLoveWidth = 60;
+
+            // กันไม่ให้ font เล็กเกิน
+            if (noLoveFont < 12) noLoveFont = 12;
+
+            // กันไม่ให้ font ใหญ่เกิน (กันแตกบนมือถือ)
+            if (loveFont > 40) loveFont = 40;
+
+            // ถ้าปุ่มรักเต็มจอแล้ว
+            if (loveWidth >= maxLoveWidth) {
+                loveWidth = maxLoveWidth;
+
+                noLoveBtn.classList.add("fade-out");
+                setTimeout(() => {
+                    noLoveBtn.style.display = "none";
+                }, 300);
+
+                canGoNext = true;
+
+                loveBtn.textContent = "รักเค้าเดะนี้! 💘";
+
+                loveBtn.classList.add("pop");
+                setTimeout(() => loveBtn.classList.remove("pop"), 500);
+            }
+
+            loveBtn.style.width = loveWidth + "px";
+            noLoveBtn.style.width = noLoveWidth + "px";
+
+            loveBtn.style.setProperty("font-size", loveFont + "px", "important");
+            noLoveBtn.style.setProperty("font-size", noLoveFont + "px", "important");
+
+
+        });
+    });
+</script>
+
+
+
 
 
 <body>
-    <div class="wrapper">
-        <div class="lid one"></div>
-        <div class="lid two"></div>
-        <div class="envelope"></div>
-        <div class="letter">
-            <p>Hello</p>
+    <div class="container gap-4">
+        <h1>เค้ามีอะไยจะถามม</h1>
+        <div class="wrapper">
+            <div class="lid one"></div>
+            <div class="lid two"></div>
+            <div class="envelope"></div>
+            <div class="letter">
+                <p>เทอรักเค้ามั้ย!?</p>
+            </div>
+        </div>
+        <div class="wrap-btn">
+            <button class="btn btn-love" id="love">ร้าก ♡</button>
+            <button class="btn btn-noLove" id="no-love">ไม่รัก ;-;</button>
         </div>
     </div>
 </body>
