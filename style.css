@@ -49,6 +49,8 @@ a {
     justify-content: center;
     text-decoration: none;
     border-radius: 3rem !important;
+    border: none;
+    padding-block: .6rem;
 }
 
 .btn-love {
