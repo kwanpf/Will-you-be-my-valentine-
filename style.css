@@ -54,12 +54,14 @@ a {
 }
 
 .btn-love {
+    color: #333;
     width: 120px;
     font-size: 20px !important;
     background-color: #8cd4b2 !important;
 }
 
 .btn-noLove {
+    color: #333;
     width: 120px;
     font-size: 20px !important;
     background-color: #d48c8c !important;
